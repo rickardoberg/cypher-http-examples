@@ -1,7 +1,5 @@
 package org.neo4j.example.rest;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
@@ -9,10 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 public class Util {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-    static String toCypherUri(String baseUri) {
+    public static String toCypherUri( String baseUri ) {
         try {
             return new URL(new URL(baseUri), "/db/data/cypher").toString();
         } catch (Exception e) {
@@ -21,14 +21,14 @@ public class Util {
     }
 
     @SuppressWarnings("unchecked")
-    static Map createPostData(String statement, Map<String, Object> params) {
+    public static Map createPostData( String statement, Map<String, Object> params ) {
         Map postData = new HashMap();
         postData.put("query", statement);
         postData.put("params", params == null ? Collections.EMPTY_MAP : params);
         return postData;
     }
 
-    static String toJson(Map postData) {
+    public static String toJson( Map postData ) {
         try {
             return OBJECT_MAPPER.writeValueAsString(postData);
         } catch (IOException e) {
