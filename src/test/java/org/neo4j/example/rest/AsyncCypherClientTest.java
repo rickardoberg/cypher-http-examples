@@ -82,6 +82,7 @@ public class AsyncCypherClientTest
     public void testAsyncQuery()
     {
         final CompletableFuture<ExecutionResult> resultFuture = new CompletableFuture<ExecutionResult>();
+
         client.query( "start n=node({id}) return id(n) as id", Collections.<String, Object>singletonMap( "id",
                 NODE_ID ), new Consumer<ExecutionResult>()
         {
